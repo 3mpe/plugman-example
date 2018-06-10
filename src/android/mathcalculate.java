@@ -13,6 +13,7 @@ import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaInterface;
+import org.apache.cordova.PluginResult;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -32,6 +33,7 @@ import java.util.Locale;
  * This class echoes a string called from JavaScript.
  */
 public class mathcalculate extends CordovaPlugin implements JivoDelegate{
+    public static final String TAG = "mathcalculate_";
 
     JivoSdk jivoSdk;
     public static String packageName;
@@ -76,11 +78,15 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
             String lang = Locale.getDefault().getLanguage().indexOf("ru") >= 0 ? "ru": "en";
 
             //*********************************************************
-            int fingerprint_auth_dialog_title_id = getResources()
-                .getIdentifier("webview", "id",
-                        cordova.getActivity().getApplicationContext().getPackageName());
+            int webID = this.cordova
+            .getActivity()
+            .getResources()
+            .getIdentifier("webview", "id", cordova
+                .getActivity()
+                .getApplicationContext()
+                .getPackageName());
 
-            jivoSdk = new JivoSdk((WebView) findViewById(R.id.webview), lang);
+            jivoSdk = new JivoSdk((WebView) findViewById(webID), lang);
             jivoSdk.delegate = this;
             // jivoSdk.prepare();
         // }
@@ -96,7 +102,7 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
             if(data.length() > 2){
                 String url = data.substring(1, data.length() - 1);
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(browserIntent);
+                this.cordova.startActivity(browserIntent);
             }
         }
     }
@@ -104,7 +110,7 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     private void startChat(CallbackContext _callback) {
         // try {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.jivosite.ru/sdk"));
-            startActivity(browserIntent);
+            this.cordova.startActivity(browserIntent);
 
             mPluginResult = new PluginResult(PluginResult.Status.Ok);            
             callbackContext.success("oppened");
