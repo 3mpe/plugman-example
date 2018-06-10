@@ -43,18 +43,18 @@ public class mathcalculate extends CordovaPlugin implements JivoDelegate{
         
     }
 
-    private void setupJivoSDK(CallbackContext callbackContext) {
-        try {
+    private void setupJivoSDK(CallbackContext _callback) {
+        // try {
             String lang = Locale.getDefault().getLanguage().indexOf("ru") >= 0 ? "ru": "en";
 
             //*********************************************************
             jivoSdk = new JivoSdk((WebView) findViewById(R.id.webview), lang);
             jivoSdk.delegate = this;
             // jivoSdk.prepare();
-        }
-        catch(Exception e) {
-            callbackContext.error("error");
-        }
+        // }
+        // catch(Exception e) {
+        //     callbackContext.error("error");
+        // }
     }
 
     //**************** jivo skd icerinde ki method ***********************
@@ -65,27 +65,26 @@ public class mathcalculate extends CordovaPlugin implements JivoDelegate{
                 String url = data.substring(1, data.length() - 1);
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(browserIntent);
-                callbackContext.success("oppened");
             }
         }
     }
 
-    private void startChat(CallbackContext callbackContext) {
-        try {
+    private void startChat(CallbackContext _callback) {
+        // try {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.jivosite.ru/sdk"));
             startActivity(browserIntent);
             callbackContext.success("oppened");
-        } catch(Exception e) {
-            callbackContext.error("error");
-        }
+        // } catch(Exception e) {
+        //     callbackContext.error("error");
+        // }
     }
 
-    private void startWithWebChat(CallbackContext callbackContext) {
-        try {
+    private void startWithWebChat(CallbackContext _callback) {
+        // try {
             jivoSdk.prepare();
             callbackContext.success("oppened");
-        } catch(Exception e) {
-            callbackContext.error("error");
-        }
+        // } catch(Exception e) {
+        //     callbackContext.error("error");
+        // }
     }
 }
