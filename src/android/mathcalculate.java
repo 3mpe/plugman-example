@@ -17,6 +17,9 @@ import android.webkit.WebView;
 //************************
 // import cordova.plugin.sdk.*;
 import java.util.Locale;
+import cordova.plugin.mathcalculator.R;
+
+
 
 
 /**
