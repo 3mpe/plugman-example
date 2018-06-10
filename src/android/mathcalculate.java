@@ -8,7 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 //************************
-import cordova.plugin.sdk.*;
+// import cordova.plugin.sdk.*;
 import java.util.Locale;
 
 
