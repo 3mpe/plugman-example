@@ -17,7 +17,6 @@ import android.webkit.WebView;
 //************************
 // import cordova.plugin.sdk.*;
 import java.util.Locale;
-import cordova.plugin.mathcalculator.R;
 
 
 
@@ -28,6 +27,22 @@ import cordova.plugin.mathcalculator.R;
 public class mathcalculate extends CordovaPlugin implements JivoDelegate{
 
     JivoSdk jivoSdk;
+    public static String packageName;
+    public static PluginResult mPluginResult;
+
+public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+        super.initialize(cordova, webView);
+        Log.v(TAG, "Init Fingerprint");
+        packageName = cordova.getActivity().getApplicationContext().getPackageName();
+        mPluginResult = new PluginResult(PluginResult.Status.NO_RESULT);
+
+        if (android.os.Build.VERSION.SDK_INT < 23) {
+            return;
+        }
+
+    }
+
+
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("setupJivo")) {
@@ -41,6 +56,9 @@ public class mathcalculate extends CordovaPlugin implements JivoDelegate{
         } else if (action.equals("startWithWebChat")) {
             this.startWithWebChat(callbackContext);
         } else {
+            mPluginResult = new PluginResult(PluginResult.Status.Error);
+            callbackContext.error("Error");
+            callbackContext.sendPluginResult(mPluginResult);
             return false;
         }
         
@@ -51,6 +69,10 @@ public class mathcalculate extends CordovaPlugin implements JivoDelegate{
             String lang = Locale.getDefault().getLanguage().indexOf("ru") >= 0 ? "ru": "en";
 
             //*********************************************************
+            int fingerprint_auth_dialog_title_id = getResources()
+                .getIdentifier("webview", "id",
+                        cordova.getActivity().getApplicationContext().getPackageName());
+
             jivoSdk = new JivoSdk((WebView) findViewById(R.id.webview), lang);
             jivoSdk.delegate = this;
             // jivoSdk.prepare();
@@ -76,7 +98,10 @@ public class mathcalculate extends CordovaPlugin implements JivoDelegate{
         // try {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.jivosite.ru/sdk"));
             startActivity(browserIntent);
+
+            mPluginResult = new PluginResult(PluginResult.Status.Ok);            
             callbackContext.success("oppened");
+            callbackContext.sendPluginResult(mPluginResult);
         // } catch(Exception e) {
         //     callbackContext.error("error");
         // }
@@ -85,7 +110,9 @@ public class mathcalculate extends CordovaPlugin implements JivoDelegate{
     private void startWithWebChat(CallbackContext _callback) {
         // try {
             jivoSdk.prepare();
+            mPluginResult = new PluginResult(PluginResult.Status.Ok);            
             callbackContext.success("oppened");
+            callbackContext.sendPluginResult(mPluginResult);
         // } catch(Exception e) {
         //     callbackContext.error("error");
         // }
