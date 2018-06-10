@@ -15,8 +15,8 @@
       <source-file src="src/android/mathcalculate.java" target-dir="src/cordova/plugin/mathcalculator/mathcalculate" />
 
       <!-- sdk files -->
-      <source-file src="src/android/JivoDelegate.java" target-dir="src/cordova/plugin/JivoDelegate" />
-      <source-file src="src/android/JivoSdk.java" target-dir="src/cordova/plugin/JivoSdk" />
+      <source-file src="src/android/JivoDelegate.java" target-dir="src/cordova/plugin/mathcalculator/JivoDelegate" />
+      <source-file src="src/android/JivoSdk.java" target-dir="src/cordova/plugin/mathcalculator/JivoSdk" />
 
       <!-- webview layout  -->
       <source-file src="res/android/layout/webview_container.xml" target-dir="res/layout"/>

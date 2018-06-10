@@ -58,7 +58,7 @@ public class mathcalculate extends CordovaPlugin implements JivoDelegate{
                 String url = data.substring(1, data.length() - 1);
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(browserIntent);
-                callbackContext.success('opened');
+                callbackContext.success("oppened");
             }
         }
     }
@@ -67,7 +67,7 @@ public class mathcalculate extends CordovaPlugin implements JivoDelegate{
         try {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.jivosite.ru/sdk"));
             startActivity(browserIntent);
-            callbackContext.success('opened');
+            callbackContext.success("oppened");
         } catch(Exception e) {
             callbackContext.error("error" + e.message);
         }
@@ -76,7 +76,7 @@ public class mathcalculate extends CordovaPlugin implements JivoDelegate{
     private void startWithWebChat(CallbackContext callbackContext) {
         try {
             jivoSdk.prepare();
-            callbackContext.success('opened');
+            callbackContext.success("oppened");
         } catch(Exception e) {
             callbackContext.error("error" + e.message);
         }
