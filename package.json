@@ -1,0 +1,28 @@
+{
+  "name": "mathcalculate",
+  "version": "1.0.0",
+  "description": "first cordova custom plugin with plugman",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/3mpe/plugman-example.git"
+  },
+  "keywords": [
+    "cordova",
+    "custom",
+    "plugin",
+    "plugin",
+    "example",
+    "custom",
+    "plugin"
+  ],
+  "author": "Emre Vatansever",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/3mpe/plugman-example/issues"
+  },
+  "homepage": "https://github.com/3mpe/plugman-example#readme"
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-mathcalculator" version="1.0.0">
+   <name>mathcalculate</name>
+   <js-module name="mathcalculate" src="www/mathcalculate.js">
+      <clobbers target="mathcalculate" />
+   </js-module>
+   <platform name="android">
+      <config-file parent="/*" target="res/xml/config.xml">
+         <feature name="mathcalculate">
+            <param name="android-package" value="cordova.plugin.mathcalculator.mathcalculate" />
+         </feature>
+      </config-file>
+      <config-file parent="/*" target="AndroidManifest.xml" />
+
+      <source-file src="src/android/mathcalculate.java" target-dir="src/cordova/plugin/mathcalculator/mathcalculate" />
+
+      <!-- sdk files -->
+      <source-file src="src/android/sdk/JivoDelegate.java" target-dir="src/cordova/plugin/sdk/JivoDelegate" />
+      <source-file src="src/android/sdk/JivoDelegate.java" target-dir="src/cordova/plugin/sdk/JivoDelegate.java" />
+
+      <!-- webview layout  -->
+      <source-file src="res/android/layout/webview_container.xml" target-dir="res/layout"/>
+
+   </platform>
+   <platform name="ios">
+      <config-file parent="/*" target="config.xml">
+         <feature name="mathcalculate">
+            <param name="ios-package" value="mathcalculate" />
+         </feature>
+      </config-file>
+      <source-file src="src/ios/mathcalculate.m" />
+   </platform>
+</plugin>
