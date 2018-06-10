@@ -7,6 +7,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.net.Uri;
+import android.os.Bundle;
+import android.webkit.WebView;
+
 //************************
 // import cordova.plugin.sdk.*;
 import java.util.Locale;
@@ -46,7 +53,7 @@ public class mathcalculate extends CordovaPlugin implements JivoDelegate{
             // jivoSdk.prepare();
         }
         catch(Exception e) {
-            callbackContext.error("error" + e.message);
+            callbackContext.error("error");
         }
     }
 
@@ -69,7 +76,7 @@ public class mathcalculate extends CordovaPlugin implements JivoDelegate{
             startActivity(browserIntent);
             callbackContext.success("oppened");
         } catch(Exception e) {
-            callbackContext.error("error" + e.message);
+            callbackContext.error("error");
         }
     }
 
@@ -78,7 +85,7 @@ public class mathcalculate extends CordovaPlugin implements JivoDelegate{
             jivoSdk.prepare();
             callbackContext.success("oppened");
         } catch(Exception e) {
-            callbackContext.error("error" + e.message);
+            callbackContext.error("error");
         }
     }
 }
