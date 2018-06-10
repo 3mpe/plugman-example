@@ -1,4 +1,4 @@
-package com.jivosite.sdk;
+package cordova.plugin.mathcalculator;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
