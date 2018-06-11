@@ -53,6 +53,7 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("setupJivo")) {
+            alert('oke 1');
             this.setupJivoSDK(callbackContext);
             // String message = args.getString(0);
             // String lang = args.getJSONObject(0).getString('lang');
@@ -73,7 +74,7 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     private void setupJivoSDK(CallbackContext _callback) {
         // try {
             String lang = Locale.getDefault().getLanguage().indexOf("ru") >= 0 ? "ru": "en";
-
+            alert('oke 2');
             //*********************************************************
             int webID = this._cordova
             .getActivity()
@@ -82,9 +83,12 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
                 .getActivity()
                 .getApplicationContext()
                 .getPackageName());
+            alert('oke 3');
 
             jivoSdk = new JivoSdk((WebView) this._cordova.getActivity().getWindow().getDecorView().findViewById(webID), lang);
-            jivoSdk.delegate = this;
+            alert('oke 4');
+            jivoSdk.delegate = this._cordova;
+            alert('oke 5');
             // jivoSdk.prepare();
         // }
         // catch(Exception e) {
