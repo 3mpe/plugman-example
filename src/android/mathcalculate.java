@@ -33,7 +33,6 @@ import java.util.Locale;
 public class mathcalculate extends CordovaPlugin implements JivoDelegate{
     public static final String TAG = "mathcalculate_";
 
-    Context ctx;
     JivoSdk jivoSdk;
     CordovaInterface _cordova;
     public static String packageName;
@@ -84,10 +83,7 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
                 .getApplicationContext()
                 .getPackageName());
 
-            jivoSdk = new JivoSdk((WebView) this._cordova
-                    .getActivity()
-                    .getApplicationContext()
-                    .findViewById(webID), lang);
+            jivoSdk = new JivoSdk((WebView) this._cordova.getActivity().getWindow().getDecorView().findViewById(webID), lang);
             jivoSdk.delegate = this;
             // jivoSdk.prepare();
         // }
