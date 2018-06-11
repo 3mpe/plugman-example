@@ -67,6 +67,7 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
             return false;
         }
         
+        return false;
     }
 
     private void setupJivoSDK(CallbackContext _callback) {
