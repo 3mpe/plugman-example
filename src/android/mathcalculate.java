@@ -36,14 +36,14 @@ public class mathcalculate extends CordovaPlugin implements JivoDelegate{
     public static final String TAG = "mathcalculate_";
 
     JivoSdk jivoSdk;
+    CordovaInterface _cordova;
     public static String packageName;
     public static PluginResult mPluginResult;
 
 public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
-        Log.v(TAG, "Init Fingerprint");
+        _cordova = cordova
         packageName = cordova.getActivity().getApplicationContext().getPackageName();
-        mPluginResult = new PluginResult(PluginResult.Status.NO_RESULT);
 
         if (android.os.Build.VERSION.SDK_INT < 23) {
             return;
@@ -65,9 +65,7 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         } else if (action.equals("startWithWebChat")) {
             this.startWithWebChat(callbackContext);
         } else {
-            mPluginResult = new PluginResult(PluginResult.Status.Error);
             callbackContext.error("Error");
-            callbackContext.sendPluginResult(mPluginResult);
             return false;
         }
         
@@ -78,15 +76,15 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
             String lang = Locale.getDefault().getLanguage().indexOf("ru") >= 0 ? "ru": "en";
 
             //*********************************************************
-            int webID = this.cordova
+            int webID = _cordova
             .getActivity()
             .getResources()
-            .getIdentifier("webview", "id", cordova
+            .getIdentifier("webview", "id", _cordova
                 .getActivity()
                 .getApplicationContext()
                 .getPackageName());
 
-            jivoSdk = new JivoSdk((WebView) findViewById(webID), lang);
+            jivoSdk = new JivoSdk((WebView) _cordova.findViewById(webID), lang);
             jivoSdk.delegate = this;
             // jivoSdk.prepare();
         // }
@@ -102,7 +100,7 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
             if(data.length() > 2){
                 String url = data.substring(1, data.length() - 1);
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                this.cordova.startActivity(browserIntent);
+                _cordova.startActivity(browserIntent);
             }
         }
     }
@@ -110,11 +108,9 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     private void startChat(CallbackContext _callback) {
         // try {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.jivosite.ru/sdk"));
-            this.cordova.startActivity(browserIntent);
+            _cordova.startActivity(browserIntent);
 
-            mPluginResult = new PluginResult(PluginResult.Status.Ok);            
-            callbackContext.success("oppened");
-            callbackContext.sendPluginResult(mPluginResult);
+            _callback.success("oppened");
         // } catch(Exception e) {
         //     callbackContext.error("error");
         // }
@@ -123,9 +119,7 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     private void startWithWebChat(CallbackContext _callback) {
         // try {
             jivoSdk.prepare();
-            mPluginResult = new PluginResult(PluginResult.Status.Ok);            
-            callbackContext.success("oppened");
-            callbackContext.sendPluginResult(mPluginResult);
+            _callback.success("oppened");
         // } catch(Exception e) {
         //     callbackContext.error("error");
         // }
