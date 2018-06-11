@@ -42,7 +42,7 @@ public class mathcalculate extends CordovaPlugin implements JivoDelegate{
 
 public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
-        _cordova = cordova
+        _cordova = cordova;
         packageName = cordova.getActivity().getApplicationContext().getPackageName();
 
         if (android.os.Build.VERSION.SDK_INT < 23) {
